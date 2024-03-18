@@ -11,7 +11,7 @@ WORKDIR /app
 RUN \
 git init . && \
 git remote add origin https://github.com/RedOctober117/where_is_tutoring_py.git && \
-git fetch --depth 1 origin master && \
+git fetch --depth 1 origin a43e28a && \
 git checkout master
 
 # RUN git clone --depth 1 https://github.com/RedOctober117/where_is_tutoring_py.git /app
