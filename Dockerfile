@@ -3,10 +3,18 @@ FROM python:3.8-alpine
 
 RUN apk add git
 
+RUN mkdir /app
+
 # switch working directory
 WORKDIR /app
 
-RUN git clone --depth 1 https://github.com/RedOctober117/where_is_tutoring_py.git /app
+RUN \
+git init . && \
+git remote add origin https://github.com/RedOctober117/where_is_tutoring_py.git && \
+git fetch --depth 1 origin master && \
+git checkout master
+
+# RUN git clone --depth 1 https://github.com/RedOctober117/where_is_tutoring_py.git /app
 
 RUN cat /app/wit/static/style.css
 
