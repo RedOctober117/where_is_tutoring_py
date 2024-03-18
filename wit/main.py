@@ -4,7 +4,7 @@ from enum import Enum
 app = Flask(__name__)
 
 class Room(Enum):
-    CONFERENCE = 'Confernce Room 101'
+    CONFERENCE = 'Conference Room 101'
     LAB_127 = 'Lab 127'
     LAB_124 = 'Lab 124'
 
