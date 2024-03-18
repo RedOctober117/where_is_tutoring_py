@@ -1,0 +1,64 @@
+:root {
+    --bottom-layer: #2e3440;
+    --second-layer: #3b4252;
+    --text: #eceff4;
+    --button-base: #b48ead;
+    --button-border: #b48ead;
+    --button-hover-base: #a3be8c;
+    --button-hover-border: #a3be8c;
+    --button-hover-font-color: #2e3440;
+    --content-border: #b48ead;
+    --content-border-radius: .5rem;
+    /* --second-layer: #3b4252; */
+}
+
+body {
+    background-color: var(--bottom-layer);
+    /* THIS FIXES THE OVERFLOW ON THE SIDES. DO NOT ADD PADDING TO ANY OTHER THIRDS DIVS */
+    margin: 0;
+}
+
+h1, h2, h3, h4 {
+    color: var(--button-hover-base);
+}
+
+h1 {
+    font-size: 5rem;
+}
+
+.container { 
+    display: flex;
+    justify-content: center;
+    background-color: var(--bottom-layer);
+    width: 100vw;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    color: var(--text);
+    /* font-size: 1rem; */
+}
+
+.single-article {
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    /* padding: calc(); */
+    /* border: .175rem solid var(--content-border); */
+    /* margin: auto; */
+    padding: 25vh 0;
+    border-radius: var(--content-border-radius);
+    /* width: 50%; */
+    text-align: center;
+}
+
+.single-article p {
+    padding: .25rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.single-article i {
+    font-size: 2.5rem;
+    color: var(--button-base);
+}
+
