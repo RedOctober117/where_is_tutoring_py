@@ -3,10 +3,14 @@ FROM python:3.8-alpine
 
 RUN apk add git
 
+RUN apk add cat
+
 # switch working directory
 WORKDIR /app
 
-RUN git clone https://github.com/RedOctober117/where_is_tutoring_py.git /app
+RUN git clone --depth 1 https://github.com/RedOctober117/where_is_tutoring_py.git /app
+
+RUN cat /app/wit/static/style.css
 
 # install the dependencies and packages in the requirements file
 RUN pip install -r requirements.txt
