@@ -55,6 +55,7 @@ h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
     color: var(--text);
+    /* list-style: none; */
 }
 
 .single-article i {
@@ -62,3 +63,8 @@ h1 {
     color: var(--button-base);
 }
 
+li {
+    list-style-type: none;
+    justify-content: left;
+    text-align: left;
+}
