@@ -51,7 +51,6 @@ def modify_room():
             print('KEY:', request.args['new_room'])
             write_csv('wit/rooms.csv', (request.args['new_room'],), rooms)
         if 'selection' in keys:
-            # write_csv('wit/rooms.csv', keys['Submit'], rooms)
             global current_room
             current_room = request.args['selection']
 
@@ -59,5 +58,4 @@ def modify_room():
 
 if __name__ == "__main__":
     init()
-    # app.run(host='0.0.0.0', use_reloader=True, port=8080, debug=False)
-    app.run(debug=True, use_reloader=True)
+    app.run(host='0.0.0.0', use_reloader=True, port=8080, debug=False)
