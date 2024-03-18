@@ -40,7 +40,7 @@ h1 {
 }
 
 .container { 
-    display: flexbox;
+    display: block;
     justify-content: center;
     width: 100vw;
     text-align: center;
@@ -62,7 +62,7 @@ h1 {
 }
 
 .single-article {
-    display: flexbox;
+    display: block;
     justify-content: center;
     align-items: center;
     padding: 25vh 0;
@@ -84,7 +84,6 @@ h1 {
 }
 
 .radio {
-    /* list-style-type: none; */
     justify-content: left;
     text-align: left;
 }
@@ -99,7 +98,7 @@ h1 {
     margin: 0;
 }
 
-@media (min-width: 1080px) {
+@media (min-width: 600px) {
     h1 {
         font-size: 5rem;
     }
