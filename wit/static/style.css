@@ -12,9 +12,22 @@
     /* --second-layer: #3b4252; */
 }
 
+a:link {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+    text-decoration: none;
+}
+
 body {
     background-color: var(--bottom-layer);
     /* THIS FIXES THE OVERFLOW ON THE SIDES. DO NOT ADD PADDING TO ANY OTHER THIRDS DIVS */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: var(--bottom-layer);
+    color: var(--text);
     margin: 0;
 }
 
@@ -27,26 +40,33 @@ h1 {
 }
 
 .container { 
-    display: flex;
+    display: flexbox;
     justify-content: center;
-    background-color: var(--bottom-layer);
     width: 100vw;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
-    color: var(--text);
     /* font-size: 1rem; */
+}
+
+.form-container {
+    justify-content: left;
+    align-items:flex-start;
+}
+
+.form {
+    padding: 2.5%;
+}
+
+.form ul {
+    list-style: none;
+    padding: 0;
 }
 
 .single-article {
     display: flexbox;
     justify-content: center;
     align-items: center;
-    /* padding: calc(); */
-    /* border: .175rem solid var(--content-border); */
-    /* margin: auto; */
     padding: 25vh 0;
     border-radius: var(--content-border-radius);
-    /* width: 50%; */
     text-align: center;
 }
 
@@ -63,8 +83,22 @@ h1 {
     color: var(--button-base);
 }
 
-li {
-    list-style-type: none;
+.radio {
+    /* list-style-type: none; */
     justify-content: left;
     text-align: left;
+}
+
+.radio li {
+    list-style-type: none;
+}
+
+@media (max-width: 1080px) {
+
+}
+
+.footer-image {
+    width: 2rem;
+    padding: 0;
+    margin: 0;
 }

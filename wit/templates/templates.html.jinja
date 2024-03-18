@@ -19,7 +19,7 @@
             <li><p>{{ field }} {{ text_input(field) }}</p></li>
         {%- endfor %}
         </ul>
-        {{ text_input('submit', value='Submit', type='submit') }}
+        {{ text_input('Submit', type='submit') }}
     </form>
 {%- endmacro %}
 
@@ -32,6 +32,22 @@
             <li><p>{{ radio_input(field)}} {{ field }} </p></li>
         {%- endfor %}
         </ul>
-        {{ radio_input('submit', type='submit') }}
+        {{ radio_input('Submit', type='submit') }}
     </form>
 {%- endmacro %}
+
+{% macro iterable_to_ul(iterable) -%}
+    <ul>
+    {%- for field in iterable %}
+        <li><p>{{ radio_input(field) }} {{ field }} </p></li>
+    {%- endfor %}
+    </ul>
+{%- endmacro %}
+
+{% macro ul_with_submit(iterable, input_type) -%}
+    <form>
+        {{ iterable_to_ul(iterable) }}
+        {{ input_type }}
+    </form>
+{%- endmacro %}
+

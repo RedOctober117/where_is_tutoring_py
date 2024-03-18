@@ -2,7 +2,22 @@ from flask import Flask, render_template, request
 from enum import Enum
 import csv
 
+csv_path = 'wit/rooms.csv'
+
 app = Flask(__name__)
+
+rooms = None
+current_room = None
+
+def init():
+    global rooms, current_room
+    rooms = read_csv(csv_path)
+    current_room = rooms[0]
+
+
+def refresh_rooms(path):
+    global rooms
+    rooms = read_csv(path)
 
 def read_csv(path):
     with open(path, newline='') as csvfile:
@@ -19,32 +34,30 @@ def write_csv(path:str, item: str, exclude):
             print(item)
             writer.writerow(item)
 
-rooms = read_csv('wit/rooms.csv')
-
-current_room = rooms[0]
 
 @app.route('/')
 def where_is_tutoring():
+    refresh_rooms(csv_path)
     return render_template('index.html', room=current_room)
 
 @app.route('/ghostselect', methods=['POST', 'GET'])
 def modify_room():
-    render = render_template('modify_room.html.jinja', options=rooms)
-
-    if len(request.args.keys()) != 0:
-        global current_room
-        current_room = request.args['selection']
+    refresh_rooms(csv_path)
+    render = render_template('modify_room.html', options=rooms)
+    keys = request.args.keys()
+    print(keys)
+    if len(keys) != 0:
+        if 'new_room' in keys:
+            print('KEY:', request.args['new_room'])
+            write_csv('wit/rooms.csv', (request.args['new_room'],), rooms)
+        if 'selection' in keys:
+            # write_csv('wit/rooms.csv', keys['Submit'], rooms)
+            global current_room
+            current_room = request.args['selection']
 
     return render
 
-# @app.route('/ghostwrite', methods=['POST', 'GET'])
-# def modify_room():
-#     render = render_template('modify_room.html.jinja', options=rooms)
-#     # print('here:', request.args.keys())
-#     if len(request.args.keys()) != 0:
-#         current_room = request.args['selection']
-#     return render
-
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', use_reloader=True, port=8080, debug=False)
-    # app.run(debug=True, use_reloader=True)
+    init()
+    # app.run(host='0.0.0.0', use_reloader=True, port=8080, debug=False)
+    app.run(debug=True, use_reloader=True)

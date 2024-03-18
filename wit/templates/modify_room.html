@@ -1,15 +1,26 @@
+{% import 'templates.html.jinja' as forms %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Where Is Tutoring</title>
+    <title>Modify Room</title>
     <link rel="stylesheet" href={{ url_for('static', filename='style.css') }}>
 </head>
-<body class="container">
-    <div class="single-article">
+<body class="form-container">
+    <div class="form">
         <h1><a href="/">Where Is Tutoring?</a></h1>
-        <p>Tutoring is in <i>{{ room }}</i></p>
+        <p>Tutoring is in...</p>
+        <div class="radio">
+            {{ forms.radio_query_form(options) }}
+        </div>
+        <div class="text">
+            <form>
+                {{ forms.text_input('new_room')}}
+                <input type='submit' value='Submit'>
+            </form>
+        </div>
     </div>
     <div>
         <a href="https://github.com/RedOctober117/where_is_tutoring_py" target="_blank"><img class="footer-image" src="static/github-mark/github-mark-white.png" alt="Git"></a>
