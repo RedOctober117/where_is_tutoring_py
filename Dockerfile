@@ -3,8 +3,6 @@ FROM python:3.8-alpine
 
 RUN apk add git
 
-RUN apk add cat
-
 # switch working directory
 WORKDIR /app
 
