@@ -59,3 +59,4 @@ def modify_room():
 if __name__ == "__main__":
     init()
     app.run(host='0.0.0.0', use_reloader=True, port=8080, debug=False)
+    # app.run(debug=True, use_reloader=True)
