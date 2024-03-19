@@ -36,11 +36,11 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 5rem;
 }
 
 .container { 
-    display: block;
+    display: flexbox;
     justify-content: center;
     width: 100vw;
     text-align: center;
@@ -62,7 +62,7 @@ h1 {
 }
 
 .single-article {
-    display: block;
+    display: flexbox;
     justify-content: center;
     align-items: center;
     padding: 25vh 0;
@@ -84,6 +84,7 @@ h1 {
 }
 
 .radio {
+    /* list-style-type: none; */
     justify-content: left;
     text-align: left;
 }
@@ -98,9 +99,19 @@ h1 {
     margin: 0;
 }
 
-@media (min-width: 600px) {
+.text {
+    padding-top: 1rem;
+}
+
+.hr {
+    /* justify-content: left; */
+    width: 60%;
+    color: var(--content-border);
+}
+
+@media (max-width: 1080px) {
     h1 {
-        font-size: 5rem;
+        font-size: 3rem;
     }
 }
 
