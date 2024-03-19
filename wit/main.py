@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from enum import Enum
-import csv
+from datetime import datetime, timezone
+import csv, pytz
 
 csv_path = 'wit/rooms.csv'
 
@@ -8,6 +9,7 @@ app = Flask(__name__)
 
 rooms = None
 current_room = None
+now = datetime.now(pytz.timezone('US/Eastern'))
 
 def init():
     global rooms, current_room
@@ -44,7 +46,7 @@ def write_csv(path: str, item, exclude, overwrite):
 @app.route('/')
 def where_is_tutoring():
     refresh_rooms(csv_path)
-    return render_template('index.html', room=current_room)
+    return render_template('index.html', room=current_room, timestamp=now.ctime())
 
 @app.route('/ghostselect', methods=['POST', 'GET'])
 def modify_room():
@@ -66,6 +68,8 @@ def modify_room():
             write_csv(csv_path, rooms, [], True)
         if 'new_room' in keys:
             write_csv('wit/rooms.csv', data['new_room'], rooms, False)
+        global now
+        now = datetime.now(pytz.timezone('US/Eastern')).isoformat()
 
     return render
 
@@ -73,5 +77,5 @@ def modify_room():
 
 if __name__ == "__main__":
     init()
-    app.run(host='0.0.0.0', use_reloader=True, port=8080, debug=False)
-    # app.run(debug=True, use_reloader=True)
+    # app.run(host='0.0.0.0', use_reloader=True, port=8080, debug=False)
+    app.run(debug=True, use_reloader=True)

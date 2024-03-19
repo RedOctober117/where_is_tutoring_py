@@ -104,9 +104,13 @@ h1 {
 }
 
 .hr {
-    /* justify-content: left; */
     width: 60%;
     color: var(--content-border);
+}
+
+.subscript i {
+    color: var(--button-hover-border);
+    font-size: 1rem;
 }
 
 @media (max-width: 1080px) {
