@@ -9,13 +9,17 @@ app = Flask(__name__)
 
 rooms = None
 current_room = None
-now = datetime.now(pytz.timezone('US/Eastern'))
+now = None
 
 def init():
-    global rooms, current_room
+    global rooms, current_room, now
     rooms = read_csv(csv_path)
     current_room = None
+    now = get_now()
 
+def get_now():
+    now = datetime.now(pytz.timezone('US/Eastern'))
+    return now.strftime('%a %d %b %Y, %I:%M%p')
 
 def refresh_rooms(path):
     global rooms
@@ -46,7 +50,7 @@ def write_csv(path: str, item, exclude, overwrite):
 @app.route('/')
 def where_is_tutoring():
     refresh_rooms(csv_path)
-    return render_template('index.html', room=current_room, timestamp=now.ctime())
+    return render_template('index.html', room=current_room, timestamp=now)
 
 @app.route('/ghostselect', methods=['POST', 'GET'])
 def modify_room():
@@ -69,7 +73,7 @@ def modify_room():
         if 'new_room' in keys:
             write_csv('wit/rooms.csv', data['new_room'], rooms, False)
         global now
-        now = datetime.now(pytz.timezone('US/Eastern')).isoformat()
+        now = get_now()
 
     return render
 
@@ -77,5 +81,5 @@ def modify_room():
 
 if __name__ == "__main__":
     init()
-    # app.run(host='0.0.0.0', use_reloader=True, port=8080, debug=False)
-    app.run(debug=True, use_reloader=True)
+    app.run(host='0.0.0.0', use_reloader=True, port=8080, debug=False)
+    # app.run(debug=True, use_reloader=True)
