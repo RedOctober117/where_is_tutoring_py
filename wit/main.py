@@ -12,7 +12,7 @@ current_room = None
 def init():
     global rooms, current_room
     rooms = read_csv(csv_path)
-    current_room = rooms[0]
+    current_room = None
 
 
 def refresh_rooms(path):
@@ -27,13 +27,19 @@ def read_csv(path):
             rooms.add(line[0])
         return list(rooms)
 
-def write_csv(path:str, item: str, exclude):
-    with open(path, 'a', newline='') as csvfile:
+def write_csv(path: str, item, exclude, overwrite):
+    with open(path, 'w' if overwrite else 'a', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-        if item[0] not in exclude:
-            print(item)
-            writer.writerow(item)
-
+        if type(item) is tuple:
+            if item[0] not in exclude:
+                writer.writerow(item)
+        elif type(item) is list:
+            for i in item:
+                if i[0] not in exclude:
+                    writer.writerow((i,))
+        else:
+            if item not in exclude:
+                writer.writerow((item,))
 
 @app.route('/')
 def where_is_tutoring():
@@ -42,22 +48,30 @@ def where_is_tutoring():
 
 @app.route('/ghostselect', methods=['POST', 'GET'])
 def modify_room():
+    global rooms, current_room
     refresh_rooms(csv_path)
     render = render_template('modify_room.html', options=rooms)
-    keys = request.args.keys()
+    keys = request.form.keys()
+    method = request.method
+    data = request.form
     print(keys)
-    if len(keys) != 0:
-        if 'new_room' in keys:
-            print('KEY:', request.args['new_room'])
-            write_csv('wit/rooms.csv', (request.args['new_room'],), rooms)
+    if method == 'POST':
         if 'selection' in keys:
-            # write_csv('wit/rooms.csv', keys['Submit'], rooms)
+            print('in selection')
             global current_room
-            current_room = request.args['selection']
+            current_room = data['selection']
+        if 'removal' in keys:
+            print('in removal')
+            rooms.remove(data['removal'])
+            write_csv(csv_path, rooms, [], True)
+        if 'new_room' in keys:
+            write_csv('wit/rooms.csv', data['new_room'], rooms, False)
 
     return render
 
+
+
 if __name__ == "__main__":
     init()
-    # app.run(host='0.0.0.0', use_reloader=True, port=8080, debug=False)
-    app.run(debug=True, use_reloader=True)
+    app.run(host='0.0.0.0', use_reloader=True, port=8080, debug=False)
+    # app.run(debug=True, use_reloader=True)

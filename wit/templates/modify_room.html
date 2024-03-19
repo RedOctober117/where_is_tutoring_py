@@ -11,14 +11,37 @@
 <body class="form-container">
     <div class="form">
         <h1><a href="/">Where Is Tutoring?</a></h1>
-        <p>Tutoring is in...</p>
+        <h2>Select Room</h2>
         <div class="radio">
-            {{ forms.radio_query_form(options) }}
+            <form method="POST">
+                <ul>
+                {%- for field in options %}
+                    <li><p>{{ forms.radio_input(field)}} {{ field }} </p></li>
+                {%- endfor %}
+                </ul>
+                <!-- {{ forms.radio_input('Select', type='submit', name='selection') }} -->
+                <input type='submit', value='Select'>
+                <!-- {{ forms.radio_input('Remove', type='submit', name='removal') }} -->
+            </form>
         </div>
         <div class="text">
-            <form>
+            <form method="POST">
                 {{ forms.text_input('new_room')}}
-                <input type='submit' value='Submit'>
+                <input type='submit' value='Add'>
+            </form>
+        </div>
+        <hr class="hr">
+        <h2>Remove Room</h2>
+        <div class="radio">
+            <form method="POST">
+                <ul>
+                    {%- for field in options %}
+                    <li><p>{{ forms.radio_input(field, name='removal')}} {{ field }} </p></li>
+                    {%- endfor %}
+                </ul>
+                <!-- {{ forms.radio_input('Select', type='submit', name='selection') }} -->
+                <input type='submit', value='Remove'>
+                <!-- {{ forms.radio_input('Remove', type='submit', name='removal') }} -->
             </form>
         </div>
     </div>

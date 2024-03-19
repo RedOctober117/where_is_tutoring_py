@@ -99,6 +99,16 @@ h1 {
     margin: 0;
 }
 
+.text {
+    padding-top: 1rem;
+}
+
+.hr {
+    /* justify-content: left; */
+    width: 60%;
+    color: var(--content-border);
+}
+
 @media (max-width: 1080px) {
     h1 {
         font-size: 3rem;
