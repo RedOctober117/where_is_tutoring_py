@@ -16,13 +16,13 @@ git checkout master
 
 # RUN git clone --depth 1 https://github.com/RedOctober117/where_is_tutoring_py.git /app
 
-RUN cat /app/wit/static/style.css
+# RUN cat /app/wit/static/style.css
 
 # install the dependencies and packages in the requirements file
-RUN pip install -r requirements.txt
+RUN pip install -r /app/requirements.txt
 
 # copy every content from the local file to the image
-COPY . /app
+# COPY . /app
 
 # configure the container to run in an executed manner
 ENTRYPOINT [ "python" ]
